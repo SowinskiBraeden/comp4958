@@ -11,7 +11,7 @@ defmodule Lec1 do
   def fact2(n) do n * fact2(n - 1) end
 
   def fact3(n) when n <= 0 do 1 end # using guard
-  def fact3(n) do  n * fact3(n - 1) end
+  def fact3(n) do n * fact3(n - 1) end
 
   # What on earth is going on?
   # do: with commas eliminates end?
