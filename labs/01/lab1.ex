@@ -14,7 +14,7 @@ defmodule Lab1 do
   def inverse_mod(a, n) do
     case inverse_mod(n, 0, a, 1) do
       {r, _} when r > 1 ->
-        :not_invertable
+        :not_invertible
 
       {_, t} when t < 0 ->
         t + n
@@ -25,10 +25,16 @@ defmodule Lab1 do
   end
 
   # Question 2 - Fast modular exponent
-  defp pow_mod(acc, _, m, _) when m == 0, do: acc
-  defp pow_mod(acc, a, m, n), do: pow_mod(
-    rem(acc * a, n), a, m - 1, n
-  )
+  defp pow_mod(acc, a, m, n) do
+    case rem(m, 2) do
+      0 when m == 0 ->
+        acc
+      0 when m > 0 ->
+        pow_mod(acc, rem(a*a, n), div(m, 2), n)
+      _ ->
+        pow_mod(rem(acc * a, n), rem(a*a, n), div(m, 2), n)
+    end
+  end
 
   def pow_mod(a, m, n) do
     rem(pow_mod(1, a, m, n), n)
