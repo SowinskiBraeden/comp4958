@@ -48,7 +48,7 @@ defmodule Counter do
 
   ## --- Client API ---
   def value(pid) do
-    send(pid, self(), :value)
+    send(pid, {self(), :value})
     receive do
       x -> x
     end
