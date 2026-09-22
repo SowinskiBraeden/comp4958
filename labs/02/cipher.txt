@@ -1,0 +1,30 @@
+Given:
+- public key = {e, n} where
+  e = 65537
+  n = 150833184288091770161966794058583103894140817040870314600690471524168617075425648362232214626866783147628121644765079260823839601102585268527908198147644311732189788842930506819720606279195272120981495283244202074795161751033872021233632806698896506286786027999600824135350742013291456231834593908211807306581
+- ciphertext (in file "ciphertext.data")
+
+To decrypt, you need to find 2 primes whose product is n.  This is the
+difficult part of breaking RSA encryption.
+
+However, in this case, you are given: n = p * q where
+p = 12945845173329038168894514532852761087184861453819103626524746458007544079436193033296354255392833659165781825320450882527971501424543610656635242495207243
+q = 11651088227042719432197879712448441990940913399774434709130882531920046670720814447752206963062868458438310623799329703497031760471331490496164292198579167
+
+The private key is then {d, n}, where d is the multiplicative inverse of e
+modulo (p - 1) * (q - 1).  (You can use a function in lab1 to calculate this.)
+
+Then to decrypt the content of "ciphertext.data", 
+1) you first have to convert the content (a binary) into an integer. Let's
+   call it c.
+2) calculate c ^ d (mod n) (Here c ^ d means c raised to the d-th power)
+   (You can use a function in lab1 to calculate this).  Assume this gives us
+   m, an integer.
+3) convert m to a binary to get the message
+
+To convert a binary to an integer, think of each octet in the binary as 
+a digit in base 256, e.g.,
+<<92, 14, 93>> gives 92 * 256^2 + 14 * 256 + 93
+Converting an integer to binary requires the inverse operation (basically
+keep on dividing by 256 and taking remainders)
+
