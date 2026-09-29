@@ -10,3 +10,4 @@
 # projects
 `mix new <name>` creates a prject dir with name
 `iex -S mix`     runs mix script
+`mix new <name> --sup`
