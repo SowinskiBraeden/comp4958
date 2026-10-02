@@ -3,7 +3,7 @@ defmodule Card.Worker do
 
   ### Client API ###
   def start() do
-    GenServer.start(__MODULE__, fresh(), name: __MODULE__)
+    GenServer.start(__MODULE__, nil, name: __MODULE__)
   end
 
   def new() do
@@ -31,8 +31,8 @@ defmodule Card.Worker do
   end
 
   @impl true
-  def init(arg) do
-    {:ok, arg}
+  def init(_arg) do
+    {:ok, fresh()}
   end
 
   @impl true

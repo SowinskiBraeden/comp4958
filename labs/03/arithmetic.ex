@@ -13,6 +13,8 @@ defmodule Arithmetic.Worker do
 
   @impl true
   def handle_cast({:square, x, from}, state) do
+    # The server dispatches work asynchronously, so workers handle casts and
+    # reply directly to the client that made the original GenServer.call/2.
     GenServer.reply(from, {self(), x * x})
     {:noreply, state}
   end
@@ -61,7 +63,7 @@ defmodule Arithmetic.Server do
     GenServer.cast(worker, {:square, x, from})
 
     next = rem(index + 1, length(workers))
-    # dont reply here, worker will reply
+    # Do not reply here; the selected worker replies to `from` after the cast.
     {:noreply, {workers, next}}
   end
 
