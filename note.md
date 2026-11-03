@@ -11,3 +11,5 @@
 `mix new <name>` creates a prject dir with name
 `iex -S mix`     runs mix script
 `mix new <name> --sup`
+
+`iex --sname homer -S mix` run in a node named homer
