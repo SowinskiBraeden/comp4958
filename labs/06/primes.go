@@ -6,6 +6,10 @@ import (
 	"strconv"
 )
 
+/*
+ * Sieve of Eratosthenes: but tail recursive
+ */
+
 func sieve(p, acc []int, n int) []int {
 	if len(p) == 0 {
 		return acc
@@ -28,7 +32,7 @@ func sieve(p, acc []int, n int) []int {
 
 // precondition: 0 <= m < n
 func primes(m, n int) []int {
-	if m < 0 || m >= n || n < 2 {
+	if m > n || n < 2 {
 		return []int{}
 	}
 
